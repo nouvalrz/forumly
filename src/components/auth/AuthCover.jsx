@@ -7,7 +7,7 @@ function AuthCover({ className }) {
   return (
     <div
       className={clsx(
-        'relative p-16 bg-gradient-to-br from-red-100 to-zinc-50',
+        'relative p-16 bg-linear-to-br from-red-100 to-zinc-50',
         className
       )}
     >
