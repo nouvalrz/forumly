@@ -23,7 +23,7 @@ function IconButton({
 }
 
 IconButton.propTypes = {
-  title: PropTypes.string,
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   icon: PropTypes.object,
   onClick: PropTypes.func,
   className: PropTypes.string,

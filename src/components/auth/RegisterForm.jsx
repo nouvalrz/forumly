@@ -67,7 +67,6 @@ function RegisterForm({ className }) {
       <form
         className="flex flex-col items-stretch w-full gap-4"
         onSubmit={handleSubmit(register)}
-        // onSubmit={(event) => event.preventDefault()}
       >
         <div>
           <Input
@@ -102,11 +101,7 @@ function RegisterForm({ className }) {
             <p className="text-red-500 text-sm">{errors.password}</p>
           )}
         </div>
-        <RegularButton
-          title="Register"
-          type={RegularButton.type.submit}
-          // onClick={openModal}
-        />
+        <RegularButton title="Register" type={RegularButton.type.submit} />
       </form>
 
       <p className="text-sm md:text-md mt-5">

@@ -53,7 +53,6 @@ function AppRouter() {
         style={{ backgroundColor: 'oklch(0.592 0.249 0.584)', zIndex: 100 }}
       />
       <Modal />
-
       <div className="min-w-screen h-dvh flex flex-col lg:flex-row">
         <div className="lg:hidden">
           <NavigationHeaderMobile />

@@ -1,5 +1,6 @@
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import forumlyApi from '../../data/remote/forumlyApi';
+import { setModalOpen, setModalText } from '../modal/action';
 
 const ActionType = {
   RECEIVE_THREAD_DETAIL: 'RECEIVE_THREAD_DETAIL',
@@ -85,7 +86,12 @@ function fetchThreadDetail(id) {
       const threadDetail = await forumlyApi.getDetailThread(id);
       dispatch(receiveThreadDetail(threadDetail));
     } catch (error) {
-      console.error(error);
+      dispatch(
+        setModalText(
+          `⛔️  ${error.response.data.message || 'Something went wrong'}`
+        )
+      );
+      dispatch(setModalOpen(true));
     }
     dispatch(hideLoading());
   };
@@ -104,7 +110,12 @@ function handleUpVoteThreadDetail() {
       try {
         await forumlyApi.upVoteThread(threadDetail.id);
       } catch (error) {
-        console.log(error);
+        dispatch(
+          setModalText(
+            `⛔️  ${error.response.data.message || 'Something went wrong'}`
+          )
+        );
+        dispatch(setModalOpen(true));
         dispatch(setNeutralVoteThreadDetail(authUser.id));
       }
     } else {
@@ -128,7 +139,12 @@ function handleDownVoteThreadDetail() {
       try {
         await forumlyApi.downVoteThread(threadDetail.id);
       } catch (error) {
-        console.log(error);
+        dispatch(
+          setModalText(
+            `⛔️  ${error.response.data.message || 'Something went wrong'}`
+          )
+        );
+        dispatch(setModalOpen(true));
         dispatch(setNeutralVoteThreadDetail(authUser.id));
       }
     } else {
@@ -149,7 +165,12 @@ function handleNeutralVoteThreadDetail() {
     try {
       await forumlyApi.neutralVoteThread(threadDetail.id);
     } catch (error) {
-      console.log(error);
+      dispatch(
+        setModalText(
+          `⛔️  ${error.response.data.message || 'Something went wrong'}`
+        )
+      );
+      dispatch(setModalOpen(true));
       dispatch(setNeutralVoteThreadDetail(authUser.id));
     }
 
@@ -178,7 +199,12 @@ function handleUpVoteComment(commentId) {
           commentId: comment.id,
         });
       } catch (error) {
-        console.log(error);
+        dispatch(
+          setModalText(
+            `⛔️  ${error.response.data.message || 'Something went wrong'}`
+          )
+        );
+        dispatch(setModalOpen(true));
         dispatch(
           setNeutralVoteComment({
             commentId: comment.id,
@@ -215,7 +241,12 @@ function handleDownVoteComment(commentId) {
           commentId: comment.id,
         });
       } catch (error) {
-        console.log(error);
+        dispatch(
+          setModalText(
+            `⛔️  ${error.response.data.message || 'Something went wrong'}`
+          )
+        );
+        dispatch(setModalOpen(true));
         dispatch(
           setNeutralVoteComment({
             commentId: comment.id,
@@ -250,7 +281,12 @@ function handleNeutralVoteComment(commentId) {
         commentId: comment.id,
       });
     } catch (error) {
-      console.log(error);
+      dispatch(
+        setModalText(
+          `⛔️  ${error.response.data.message || 'Something went wrong'}`
+        )
+      );
+      dispatch(setModalOpen(true));
       dispatch(
         setNeutralVoteComment({
           commentId: comment.id,
@@ -276,7 +312,12 @@ function sendComment({ content }) {
       });
       dispatch(addComment(comment));
     } catch (error) {
-      console.error(error);
+      dispatch(
+        setModalText(
+          `⛔️  ${error.response.data.message || 'Something went wrong'}`
+        )
+      );
+      dispatch(setModalOpen(true));
     }
     dispatch(hideLoading());
   };

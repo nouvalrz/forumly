@@ -30,10 +30,10 @@ function ReplyCard({ comments, onUpVote, onDownVote, authUserId }) {
 }
 
 ReplyCard.propTypes = {
-  comments: PropTypes.array,
-  authUserId: PropTypes.string,
-  onDownVote: PropTypes.func,
-  onUpVote: PropTypes.func,
+  comments: PropTypes.array.isRequired,
+  authUserId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  onDownVote: PropTypes.func.isRequired,
+  onUpVote: PropTypes.func.isRequired,
 };
 
 export default ReplyCard;

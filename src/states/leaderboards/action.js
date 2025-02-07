@@ -1,5 +1,6 @@
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import forumlyApi from '../../data/remote/forumlyApi';
+import { setModalOpen, setModalText } from '../modal/action';
 
 const ActionType = {
   RECEIVE_LEADERBOARDS: 'RECEIVE_LEADERBOARDS',
@@ -20,7 +21,12 @@ function fetchLeaderboards() {
       const leaderboards = await forumlyApi.getLeaderboards();
       dispatch(receiveLeaderboards(leaderboards));
     } catch (error) {
-      console.error(error);
+      dispatch(
+        setModalText(
+          `⛔️  ${error.response.data.message || 'Something went wrong'}`
+        )
+      );
+      dispatch(setModalOpen(true));
     }
 
     dispatch(hideLoading());

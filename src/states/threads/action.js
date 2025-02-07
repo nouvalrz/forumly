@@ -59,7 +59,12 @@ function handleUpVoteThread(threadId) {
       try {
         await forumlyApi.upVoteThread(threadId);
       } catch (error) {
-        console.log(error);
+        dispatch(
+          setModalText(
+            `⛔️  ${error.response.data.message || 'Something went wrong'}`
+          )
+        );
+        dispatch(setModalOpen(true));
         dispatch(setNeutralVoteThread(threadId));
       }
     } else {
@@ -84,7 +89,12 @@ function handleDownVoteThread(threadId) {
       try {
         await forumlyApi.downVoteThread(threadId);
       } catch (error) {
-        console.log(error);
+        dispatch(
+          setModalText(
+            `⛔️  ${error.response.data.message || 'Something went wrong'}`
+          )
+        );
+        dispatch(setModalOpen(true));
         dispatch(setNeutralVoteThread(threadId));
       }
     } else {
@@ -105,7 +115,12 @@ function handleNeutralVoteThread(threadId) {
     try {
       await forumlyApi.neutralVoteThread(threadId);
     } catch (error) {
-      console.log(error);
+      dispatch(
+        setModalText(
+          `⛔️  ${error.response.data.message || 'Something went wrong'}`
+        )
+      );
+      dispatch(setModalOpen(true));
       dispatch(setNeutralVoteThread(threadId));
     }
 
@@ -120,7 +135,12 @@ function fetchThreads() {
       const threads = await forumlyApi.getAllThread();
       dispatch(receiveThreads(threads));
     } catch (error) {
-      console.error(error);
+      dispatch(
+        setModalText(
+          `⛔️  ${error.response.data.message || 'Something went wrong'}`
+        )
+      );
+      dispatch(setModalOpen(true));
     }
     dispatch(hideLoading());
   };
@@ -138,7 +158,7 @@ function handleAddThread({ title, body, category = '' }) {
     } catch (error) {
       dispatch(
         setModalText(
-          '⛔️ ' + (error.response.data.message || 'Something went wrong')
+          `⛔️  ${error.response.data.message || 'Something went wrong'}`
         )
       );
       dispatch(setModalOpen(true));

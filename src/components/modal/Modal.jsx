@@ -7,11 +7,11 @@ import { useSelector } from 'react-redux';
 const dropAnimation = {
   hidden: {
     opacity: 0,
-    y: -100, // Muncul dari atas layar
+    y: -100,
   },
   visible: {
     opacity: 1,
-    y: 0, // Berhenti di posisi normal
+    y: 0,
     transition: {
       duration: 0.3,
       type: 'spring',
@@ -19,7 +19,7 @@ const dropAnimation = {
   },
   exit: {
     opacity: 0,
-    y: -100, // Kembali ke atas saat menghilang
+    y: -100,
   },
 };
 

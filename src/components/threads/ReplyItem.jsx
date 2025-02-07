@@ -66,15 +66,15 @@ function ReplyItem({
 }
 
 ReplyItem.propTypes = {
-  id: PropTypes.number,
-  authUserId: PropTypes.string,
-  content: PropTypes.string,
-  createdAt: PropTypes.string,
-  owner: PropTypes.object,
-  upVotesBy: PropTypes.array,
-  downVotesBy: PropTypes.array,
-  onDownVote: PropTypes.func,
-  onUpVote: PropTypes.func,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  authUserId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  content: PropTypes.string.isRequired,
+  createdAt: PropTypes.string.isRequired,
+  owner: PropTypes.object.isRequired,
+  upVotesBy: PropTypes.array.isRequired,
+  downVotesBy: PropTypes.array.isRequired,
+  onDownVote: PropTypes.func.isRequired,
+  onUpVote: PropTypes.func.isRequired,
 };
 
 export default ReplyItem;

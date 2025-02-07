@@ -23,7 +23,7 @@ function handleRegister({ name, email, password }) {
     } catch (error) {
       dispatch(
         setModalText(
-          '⛔️ ' + (error.response.data.message || 'Something went wrong')
+          `⛔️ ${error.response.data.message || 'Something went wrong'}`
         )
       );
       dispatch(setModalOpen(true));
@@ -39,7 +39,12 @@ function fetchUsers() {
       const users = await forumlyApi.getAllUser();
       dispatch(receiveUsers(users));
     } catch (error) {
-      console.log(error);
+      dispatch(
+        setModalText(
+          `⛔️  ${error.response.data.message || 'Something went wrong'}`
+        )
+      );
+      dispatch(setModalOpen(true));
     }
     dispatch(hideLoading());
   };

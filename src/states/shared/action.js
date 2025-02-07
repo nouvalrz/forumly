@@ -2,6 +2,7 @@ import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import forumlyApi from '../../data/remote/forumlyApi';
 import { receiveThreads } from '../threads/action';
 import { receiveUsers } from '../users/action';
+import { setModalOpen, setModalText } from '../modal/action';
 
 function populateThreadsAndUsers() {
   return async (dispatch) => {
@@ -13,7 +14,12 @@ function populateThreadsAndUsers() {
       dispatch(receiveUsers(users));
       dispatch(receiveThreads(threads));
     } catch (error) {
-      console.error(error);
+      dispatch(
+        setModalText(
+          `⛔️  ${error.response.data.message || 'Something went wrong'}`
+        )
+      );
+      dispatch(setModalOpen(true));
     }
     dispatch(hideLoading());
   };

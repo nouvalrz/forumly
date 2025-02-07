@@ -27,7 +27,7 @@ function Backdrop({ children, className }) {
 }
 
 Backdrop.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.element.isRequired,
   className: PropTypes.string,
 };
 

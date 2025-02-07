@@ -97,19 +97,19 @@ function ThreadCard({
 }
 
 ThreadCard.propTypes = {
-  id: PropTypes.number,
-  title: PropTypes.string,
-  body: PropTypes.string,
-  category: PropTypes.string,
-  createdAt: PropTypes.string,
-  owner: PropTypes.object,
-  upVotesBy: PropTypes.array,
-  downVotesBy: PropTypes.array,
-  totalComments: PropTypes.number,
-  authUserId: PropTypes.string,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  title: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  createdAt: PropTypes.string.isRequired,
+  owner: PropTypes.object.isRequired,
+  upVotesBy: PropTypes.array.isRequired,
+  downVotesBy: PropTypes.array.isRequired,
+  totalComments: PropTypes.number.isRequired,
+  authUserId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   fullBody: PropTypes.bool,
-  onDownVote: PropTypes.func,
-  onUpVote: PropTypes.func,
+  onDownVote: PropTypes.func.isRequired,
+  onUpVote: PropTypes.func.isRequired,
 };
 
 export default ThreadCard;

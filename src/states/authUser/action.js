@@ -37,7 +37,12 @@ function handleLogin({ email, password }) {
       dispatch(setModalText('🩷 Welcome to Forumly'));
       dispatch(setModalOpen(true));
     } catch (error) {
-      console.error(error);
+      dispatch(
+        setModalText(
+          `⛔️  ${error.response.data.message || 'Something went wrong'}`
+        )
+      );
+      dispatch(setModalOpen(true));
     }
     dispatch(hideLoading());
   };
@@ -52,7 +57,12 @@ function handleLogout() {
       dispatch(setModalText('👋 Bye-bye'));
       dispatch(setModalOpen(true));
     } catch (error) {
-      console.error(error);
+      dispatch(
+        setModalText(
+          `⛔️  ${error.response.data.message || 'Something went wrong'}`
+        )
+      );
+      dispatch(setModalOpen(true));
     }
   };
 }

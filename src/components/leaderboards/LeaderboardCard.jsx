@@ -16,7 +16,7 @@ function LeaderboardCard({ leaderboards }) {
 }
 
 LeaderboardCard.propTypes = {
-  leaderboards: PropTypes.array,
+  leaderboards: PropTypes.array.isRequired,
 };
 
 export default LeaderboardCard;

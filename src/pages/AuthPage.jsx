@@ -6,7 +6,7 @@ import RegisterForm from '../components/auth/RegisterForm';
 
 function AuthPage({ type }) {
   return (
-    <div className="flex flex-col min-h-screen md:flex-row">
+    <section className="flex flex-col min-h-screen md:flex-row">
       <AuthCover className="flex-1" />
       <div className="flex-2 flex flex-col justify-start md:justify-center items-center p-10 text">
         {type === AuthPage.type.login && (
@@ -16,7 +16,7 @@ function AuthPage({ type }) {
           <RegisterForm className="max-w-96 w-full" />
         )}
       </div>
-    </div>
+    </section>
   );
 }
 AuthPage.type = {

@@ -15,7 +15,7 @@ function BaseCard({ children, className }) {
 }
 
 BaseCard.propTypes = {
-  children: PropTypes.any,
+  children: PropTypes.any.isRequired,
   className: PropTypes.string,
 };
 

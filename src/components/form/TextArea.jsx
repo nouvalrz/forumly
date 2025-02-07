@@ -31,9 +31,9 @@ function TextArea({
 TextArea.propTypes = {
   placeholder: PropTypes.string,
   type: PropTypes.string,
-  value: PropTypes.any,
-  onChange: PropTypes.func,
-  name: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  onChange: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
   className: PropTypes.string,
   cols: PropTypes.number,
   rows: PropTypes.number,

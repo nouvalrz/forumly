@@ -22,10 +22,6 @@ function DetailPage() {
     dispatch(fetchThreadDetail(id));
   }, [dispatch, id]);
 
-  useEffect(() => {
-    console.log(threadDetail);
-  }, [threadDetail]);
-
   const upVoteThread = () => {
     dispatch(handleUpVoteThreadDetail());
   };
