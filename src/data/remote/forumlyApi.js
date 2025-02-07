@@ -20,266 +20,270 @@ forumlyClient.interceptors.request.use(
   }
 );
 
-async function register({ name, email, password }) {
-  const response = await forumlyClient.post('/register', {
-    name,
-    email,
-    password,
-  });
+const forumlyApi = (() => {
+  async function register({ name, email, password }) {
+    const response = await forumlyClient.post('/register', {
+      name,
+      email,
+      password,
+    });
 
-  if (response.status !== 200) {
-    throw new Error(response.data.message);
+    if (response.data.status !== 'success') {
+      throw new Error(response.data.message);
+    }
+
+    const {
+      data: { user },
+    } = response.data;
+
+    return user;
   }
 
-  const {
-    data: { user },
-  } = response.data;
+  async function login({ email, password }) {
+    const response = await forumlyClient.post('/login', { email, password });
 
-  return user;
-}
+    if (response.data.status !== 'success') {
+      throw new Error(response.data.message);
+    }
 
-async function login({ email, password }) {
-  const response = await forumlyClient.post('/login', { email, password });
+    const {
+      data: { token },
+    } = response.data;
 
-  if (response.status !== 200) {
-    throw new Error(response.data.message);
+    return token;
   }
 
-  const {
-    data: { token },
-  } = response.data;
+  async function getAllUser() {
+    const response = await forumlyClient.get('/users');
 
-  return token;
-}
+    if (response.data.status !== 'success') {
+      throw new Error(response.data.message);
+    }
 
-async function getAllUser() {
-  const response = await forumlyClient.get('/users');
+    const {
+      data: { users },
+    } = response.data;
 
-  if (response.status !== 200) {
-    throw new Error(response.data.message);
+    return users;
   }
 
-  const {
-    data: { users },
-  } = response.data;
+  async function getProfile() {
+    const response = await forumlyClient.get('/users/me', { withToken: true });
 
-  return users;
-}
+    if (response.data.status !== 'success') {
+      throw new Error(response.data.message);
+    }
 
-async function getProfile() {
-  const response = await forumlyClient.get('/users/me', { withToken: true });
+    const {
+      data: { user },
+    } = response.data;
 
-  if (response.status !== 200) {
-    throw new Error(response.data.message);
+    return user;
   }
 
-  const {
-    data: { user },
-  } = response.data;
+  async function getAllThread() {
+    const response = await forumlyClient.get('/threads');
 
-  return user;
-}
+    if (response.data.status !== 'success') {
+      throw new Error(response.data.message);
+    }
 
-async function getAllThread() {
-  const response = await forumlyClient.get('/threads');
+    const {
+      data: { threads },
+    } = response.data;
 
-  if (response.status !== 200) {
-    throw new Error(response.data.message);
+    return threads;
   }
 
-  const {
-    data: { threads },
-  } = response.data;
+  async function createThread({ title, body, category = '' }) {
+    const response = await forumlyClient.post(
+      '/threads',
+      { title, body, category },
+      { withToken: true }
+    );
 
-  return threads;
-}
+    if (response.data.status !== 'success') {
+      throw new Error(response.data.message);
+    }
 
-async function createThread({ title, body, category = '' }) {
-  const response = await forumlyClient.post(
-    '/threads',
-    { title, body, category },
-    { withToken: true }
-  );
+    const {
+      data: { thread },
+    } = response.data;
 
-  if (response.status !== 200) {
-    throw new Error(response.data.message);
+    return thread;
   }
 
-  const {
-    data: { thread },
-  } = response.data;
+  async function getDetailThread(id) {
+    const response = await forumlyClient.get(`/threads/${id}`);
 
-  return thread;
-}
+    if (response.data.status !== 'success') {
+      throw new Error(response.data.message);
+    }
 
-async function getDetailThread(id) {
-  const response = await forumlyClient.get(`/threads/${id}`);
+    const {
+      data: { detailThread },
+    } = response.data;
 
-  if (response.status !== 200) {
-    throw new Error(response.data.message);
+    return detailThread;
   }
 
-  const {
-    data: { detailThread },
-  } = response.data;
+  async function createComment({ threadId, content }) {
+    const response = await forumlyClient.post(
+      `/threads/${threadId}/comments`,
+      { content },
+      { withToken: true }
+    );
 
-  return detailThread;
-}
+    if (response.data.status !== 'success') {
+      throw new Error(response.data.message);
+    }
 
-async function createComment({ threadId, content }) {
-  const response = await forumlyClient.post(
-    `/threads/${threadId}/comments`,
-    { content },
-    { withToken: true }
-  );
+    const {
+      data: { comment },
+    } = response.data;
 
-  if (response.status !== 200) {
-    throw new Error(response.data.message);
+    return comment;
   }
 
-  const {
-    data: { comment },
-  } = response.data;
+  async function upVoteThread(id) {
+    const response = await forumlyClient.post(
+      `/threads/${id}/up-vote`,
+      {},
+      { withToken: true }
+    );
 
-  return comment;
-}
+    if (response.data.status !== 'success') {
+      throw new Error(response.data.message);
+    }
 
-async function upVoteThread(id) {
-  const response = await forumlyClient.post(
-    `/threads/${id}/up-vote`,
-    {},
-    { withToken: true }
-  );
+    const {
+      data: { vote },
+    } = response.data;
 
-  if (response.status !== 200) {
-    throw new Error(response.data.message);
+    return vote;
   }
 
-  const {
-    data: { vote },
-  } = response.data;
+  async function downVoteThread(id) {
+    const response = await forumlyClient.post(
+      `/threads/${id}/down-vote`,
+      {},
+      { withToken: true }
+    );
 
-  return vote;
-}
+    if (response.data.status !== 'success') {
+      throw new Error(response.data.message);
+    }
 
-async function downVoteThread(id) {
-  const response = await forumlyClient.post(
-    `/threads/${id}/down-vote`,
-    {},
-    { withToken: true }
-  );
+    const {
+      data: { vote },
+    } = response.data;
 
-  if (response.status !== 200) {
-    throw new Error(response.data.message);
+    return vote;
   }
 
-  const {
-    data: { vote },
-  } = response.data;
+  async function neutralVoteThread(id) {
+    const response = await forumlyClient.post(
+      `/threads/${id}/neutral-vote`,
+      {},
+      { withToken: true }
+    );
 
-  return vote;
-}
+    if (response.data.status !== 'success') {
+      throw new Error(response.data.message);
+    }
 
-async function neutralVoteThread(id) {
-  const response = await forumlyClient.post(
-    `/threads/${id}/neutral-vote`,
-    {},
-    { withToken: true }
-  );
+    const {
+      data: { vote },
+    } = response.data;
 
-  if (response.status !== 200) {
-    throw new Error(response.data.message);
+    return vote;
   }
 
-  const {
-    data: { vote },
-  } = response.data;
+  async function upVoteComment({ threadId, commentId }) {
+    const response = await forumlyClient.post(
+      `threads/${threadId}/comments/${commentId}/up-vote`,
+      {},
+      { withToken: true }
+    );
 
-  return vote;
-}
+    if (response.data.status !== 'success') {
+      throw new Error(response.data.message);
+    }
 
-async function upVoteComment({ threadId, commentId }) {
-  const response = await forumlyClient.post(
-    `threads/${threadId}/comments/${commentId}/up-vote`,
-    {},
-    { withToken: true }
-  );
+    const {
+      data: { vote },
+    } = response.data;
 
-  if (response.status !== 200) {
-    throw new Error(response.data.message);
+    return vote;
   }
 
-  const {
-    data: { vote },
-  } = response.data;
+  async function downVoteComment({ threadId, commentId }) {
+    const response = await forumlyClient.post(
+      `threads/${threadId}/comments/${commentId}/down-vote`,
+      {},
+      { withToken: true }
+    );
 
-  return vote;
-}
+    if (response.data.status !== 'success') {
+      throw new Error(response.data.message);
+    }
 
-async function downVoteComment({ threadId, commentId }) {
-  const response = await forumlyClient.post(
-    `threads/${threadId}/comments/${commentId}/down-vote`,
-    {},
-    { withToken: true }
-  );
+    const {
+      data: { vote },
+    } = response.data;
 
-  if (response.status !== 200) {
-    throw new Error(response.data.message);
+    return vote;
   }
 
-  const {
-    data: { vote },
-  } = response.data;
+  async function neutralVoteComment({ threadId, commentId }) {
+    const response = await forumlyClient.post(
+      `threads/${threadId}/comments/${commentId}/neutral-vote`,
+      {},
+      { withToken: true }
+    );
 
-  return vote;
-}
+    if (response.data.status !== 'success') {
+      throw new Error(response.data.message);
+    }
 
-async function neutralVoteComment({ threadId, commentId }) {
-  const response = await forumlyClient.post(
-    `threads/${threadId}/comments/${commentId}/neutral-vote`,
-    {},
-    { withToken: true }
-  );
+    const {
+      data: { vote },
+    } = response.data;
 
-  if (response.status !== 200) {
-    throw new Error(response.data.message);
+    return vote;
   }
 
-  const {
-    data: { vote },
-  } = response.data;
+  async function getLeaderboards() {
+    const response = await forumlyClient.get('/leaderboards');
 
-  return vote;
-}
+    if (response.data.status !== 'success') {
+      throw new Error(response.data.message);
+    }
 
-async function getLeaderboards() {
-  const response = await forumlyClient.get('/leaderboards');
+    const {
+      data: { leaderboards },
+    } = response.data;
 
-  if (response.status !== 200) {
-    throw new Error(response.data.message);
+    return leaderboards;
   }
 
-  const {
-    data: { leaderboards },
-  } = response.data;
+  return {
+    register,
+    login,
+    createComment,
+    createThread,
+    downVoteComment,
+    downVoteThread,
+    getAllThread,
+    getAllUser,
+    getDetailThread,
+    getLeaderboards,
+    getProfile,
+    neutralVoteComment,
+    neutralVoteThread,
+    upVoteComment,
+    upVoteThread,
+  };
+})();
 
-  return leaderboards;
-}
-
-export {
-  register,
-  login,
-  createComment,
-  createThread,
-  downVoteComment,
-  downVoteThread,
-  getAllThread,
-  getAllUser,
-  getDetailThread,
-  getLeaderboards,
-  getProfile,
-  neutralVoteComment,
-  neutralVoteThread,
-  upVoteComment,
-  upVoteThread,
-};
+export default forumlyApi;

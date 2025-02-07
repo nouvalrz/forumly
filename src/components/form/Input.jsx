@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
-import React from 'react';
 
-function Input({ placeholder = '', type = 'text' }) {
+function Input({ placeholder = '', type = 'text', value, onChange, name }) {
   return (
     <input
       type={type}
-      className="rounded-md border-gray-300 border p-2 focus:border-pink-600 focus:outline-hidden focus:ring-0 "
+      value={value}
+      onChange={(event) => onChange(event)}
+      name={name}
+      className="rounded-md border-gray-300 border p-2 focus:border-pink-600 focus:outline-hidden focus:ring-0 w-full"
       placeholder={placeholder}
     />
   );
@@ -14,6 +16,9 @@ function Input({ placeholder = '', type = 'text' }) {
 Input.propTypes = {
   placeholder: PropTypes.string,
   type: PropTypes.string,
+  value: PropTypes.any,
+  onChange: PropTypes.func,
+  name: PropTypes.string,
 };
 
 export default Input;
