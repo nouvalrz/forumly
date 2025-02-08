@@ -39,7 +39,7 @@ function AppRouter() {
           <Route path="/*" element={<AuthPage type={AuthPage.type.login} />} />
           <Route
             path="/register"
-            element={<AuthPage type={AuthPage.type.login} />}
+            element={<AuthPage type={AuthPage.type.register} />}
           />
         </Routes>
       </main>
