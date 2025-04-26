@@ -33,4 +33,4 @@ function fetchLeaderboards() {
   };
 }
 
-export { ActionType, fetchLeaderboards };
+export { ActionType, fetchLeaderboards, receiveLeaderboards };
