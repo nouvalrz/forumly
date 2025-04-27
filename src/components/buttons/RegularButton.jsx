@@ -5,6 +5,7 @@ function RegularButton({ title, type = 'button', onClick, className }) {
   if (type === RegularButton.type.button) {
     return (
       <button
+        name={title}
         className={clsx(
           className,
           'w-full rounded-md bg-pink-600 text-white px-3 py-2 font-semibold hover:bg-pink-700 transition-all cursor-pointer'
@@ -19,6 +20,7 @@ function RegularButton({ title, type = 'button', onClick, className }) {
   if (type === RegularButton.type.submit) {
     return (
       <input
+        name={title}
         type="submit"
         className={clsx(
           className,

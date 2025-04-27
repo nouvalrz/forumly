@@ -8,7 +8,6 @@ import { useDispatch } from 'react-redux';
 import { handleLogin } from '../../states/authUser/action';
 
 const loginFormInitialValues = {
-  name: '',
   email: '',
   password: '',
 };
@@ -47,10 +46,10 @@ function LoginForm({ className }) {
     <div
       className={clsx('flex flex-col justify-start items-center', className)}
     >
-      <h2 className="md:text-2xl text-xl font-bold text-gray-800 ">
+      <h2 className="text-xl font-bold text-gray-800 md:text-2xl ">
         Sign in to your account
       </h2>
-      <p className="text-gray-600 mb-7 md:text-xl text-sm">
+      <p className="text-sm text-gray-600 mb-7 md:text-xl">
         Enter your email and password
       </p>
       <form
@@ -65,7 +64,7 @@ function LoginForm({ className }) {
             name="email"
           />
           {errors.email && (
-            <p className="text-red-500 text-sm">{errors.email}</p>
+            <p className="text-sm text-red-500">{errors.email}</p>
           )}
         </div>
         <div>
@@ -77,13 +76,13 @@ function LoginForm({ className }) {
             name="password"
           />
           {errors.password && (
-            <p className="text-red-500 text-sm">{errors.password}</p>
+            <p className="text-sm text-red-500">{errors.password}</p>
           )}
         </div>
         <RegularButton title="Login" type={RegularButton.type.submit} />
       </form>
 
-      <p className="text-sm md:text-md mt-5">
+      <p className="mt-5 text-sm md:text-md">
         Dont have an account?{' '}
         <Link to="/register" className="underline">
           Register
