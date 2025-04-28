@@ -1,17 +1,17 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router";
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useParams } from 'react-router';
 import {
   fetchThreadDetail,
   handleDownVoteComment,
   handleDownVoteThreadDetail,
   handleUpVoteComment,
   handleUpVoteThreadDetail,
-} from "../states/threadDetail/action";
-import ThreadCard from "../components/threads/ThreadCard";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import ReplyCard from "../components/threads/ReplyCard";
+} from '../states/threadDetail/action';
+import ThreadCard from '../components/threads/ThreadCard';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import ReplyCard from '../components/threads/ReplyCard';
 
 function DetailPage() {
   const { id } = useParams();
@@ -50,7 +50,7 @@ function DetailPage() {
     <section className="flex flex-col gap-5 p-5 lg:p-8">
       <Link to="/">
         <h2 className="font-semibold text-gray-800 hover:text-pink-600">
-          {" "}
+          {' '}
           <FontAwesomeIcon icon={faArrowLeft} /> Back to home
         </h2>
       </Link>
